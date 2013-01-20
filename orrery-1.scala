@@ -9,6 +9,7 @@
 
 import math._
 
+
 /**
  * A planet has a semi-major axis r, a name and a position.  
  * The units of r are astronomical units.
@@ -30,7 +31,7 @@ class Planet(namein: String, rin: Double, posin: Double) {
 
   /** 
    * Advance the planet in it's orbit an angle corresponding to time
-   * delta-t.
+   * delta-t (measured in years).
    */
   def step(delta_t: Double) = {
     val delta_theta = delta_t * two_pi / period
@@ -65,7 +66,8 @@ class Orrery() {
     )
 
   /**
-   * Advance all planets in the orrery with the time step.
+   * Advance all planets in the orrery with the time step (measured in 
+   * years.
    */
   def step(delta_t: Double) = {
     planets map {_.step(delta_t)}
@@ -81,6 +83,9 @@ class Orrery() {
 }
 
 
+/* 
+ * Manually test the Planet class.
+ */
 object TestPlanets {
   def main(args: Array[String]) {
     val earth = new Planet("Earth", 1.0, 0.0)
@@ -104,6 +109,9 @@ object TestPlanets {
 }
 
 
+/* 
+ * Manually test the Orrery class.
+ */
 object TestOrrery {
   def main(args: Array[String]) {
     val orrery = new Orrery()
@@ -114,6 +122,10 @@ object TestOrrery {
 }
 
 
+/*
+ * Run the orrery class with a step size (years) for count times.
+ * The count and step size can be specified on the command line.
+ */
 object RunOrrery {
   def main(args: Array[String]) {
     var delta_t = 0.5
