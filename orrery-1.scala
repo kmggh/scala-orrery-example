@@ -35,7 +35,7 @@ class Planet(namein: String, rin: Double, posin: Double) {
    * delta-t (measured in years).
    */
   def step(delta_t: Double) = {
-    val delta_theta = 360.0 / period
+    val delta_theta = 360.0 / period * delta_t
     pos += delta_theta
 
     // Normalize the angle.
@@ -143,9 +143,11 @@ object RunOrrery {
       step_count = args(1).toInt
     }
 
-    println("Stepping the orrery " + step_count + " times")
+    println("Stepping the orrery " + step_count +
+            " times after the initial position.")
     println("With a time step increment of " + delta_t + " year(s).\n")
 
+    println(orrery)
     for (i <- 1 to step_count) {
       orrery.step(delta_t)
       println(orrery)
