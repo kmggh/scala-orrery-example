@@ -59,7 +59,7 @@ class Planet(namein: String, rin: Double, posin: Double) {
 /**
 * A string object to accumulate planet string representations.
 */
-object OrreryString {
+class OrreryString {
   var string_accumulator = new StringBuilder()
 
   def append(planet: Planet) = {
@@ -91,7 +91,7 @@ class Orrery {
   }
 
   override def toString(): String = {
-    var str_accumulator = OrreryString
+    var str_accumulator = new OrreryString
     planets map str_accumulator.append
     str_accumulator.toString
   }
