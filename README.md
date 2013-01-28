@@ -11,8 +11,19 @@ get it to run.
 To run
 ======
 
+For example.
+
     scalac orrery-1.scala
     scala RunOrrery --help
     scala RunOrrery
 
 
+To run the package-based version
+================================
+
+    scalac orrery.scala
+    scalac planet.scala
+    scalac run_orrery.scala
+
+    scala RunOrrery
+    
