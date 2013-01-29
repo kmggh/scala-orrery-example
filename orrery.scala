@@ -8,6 +8,61 @@
  */
 
 package orrery {
+  /**
+  * A string object to accumulate planet string representations.
+  */
+  class OrreryString {
+    var string_accumulator = new StringBuilder()
+  
+    def append(planet: Planet) = {
+      string_accumulator.append(planet.toString)
+      string_accumulator.append("\n")
+    }
+  
+    override def toString: String = {
+      string_accumulator.toString
+    }
+  }
+  
+  /**
+   * An orrery that maps a string accumulator function over the planets.
+   */
+  class MapOntoPlanetOrrery {
+    val planets: List[Planet] = List()
+  
+    override def toString(): String = {
+      var str_accumulator = new OrreryString
+      planets map str_accumulator.append
+      str_accumulator.toString
+    }
+  }
+
+
+  /**
+  * An orrery that uses the fold operation to implement toString.
+  */
+  class FoldPlanetOrrery {
+    val planets: List[Planet] = List()
+  
+    override def toString(): String = {
+      ("" /:planets)(_ + _.toString() + "\n")
+    }
+  }
+
+
+  /**
+   * An orrery that uses the foreach method of traversing the planet list.
+   */
+  class ForEachPlanetOrrery {
+    val planets: List[Planet] = List()
+  
+    override def toString(): String = {
+      var outstr = ""
+      planets foreach (outstr += _.toString + "\n")
+      outstr
+    }
+  }
+
 
   /** 
    * An orrery holds a collection of planets.
@@ -15,21 +70,13 @@ package orrery {
    * This class defines the methods.  The planets value should be overridden
    * with a specific list of planets.
    */
-  class Orrery {
-    val planets: List[Planet] = List()
-  
+  class Orrery extends ForEachPlanetOrrery {
     /**
      * Advance all planets in the orrery with the time step (measured in 
      * years.
      */
     def step(delta_t: Double) = {
       planets map {_.step(delta_t)}
-    }
-  
-    override def toString(): String = {
-      var outstr = ""
-      planets foreach (outstr += _.toString + "\n")
-      outstr
     }
   }
   
@@ -44,5 +91,6 @@ package orrery {
       new Planet("Neptune", 30.1, 0.0)
       )
   }
+
 }
   

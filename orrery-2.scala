@@ -77,11 +77,23 @@ class Orrery {
     // Fold technique is a bit obscure:
     // ("" /:planets)(_ + _.toString() + "\n")
 
-    var outstr = ""
+    //var outstr = ""
     // Another way to walk the list:
     // planets foreach (outstr += _.toString + "\n")
-    for (p <- planets) (outstr += p.toString + "\n")
-    outstr
+
+    // The for comprehension.
+    // for (p <- planets) (outstr += p.toString + "\n")
+    //outstr
+
+    def append_planet_str(planet:Planet): (Planet => Unit) = {
+      return (x) => {x.append(planet.toString)}
+    }
+
+    var outstr = new StringBuilder()
+    planets map append_planet_str(_)(outstr)
+    outstr.append("\n")
+
+    outstr.toString
   }
 }
 
