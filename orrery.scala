@@ -1,6 +1,14 @@
 /**
  * A solar system orrery in Scala.
  *
+ * Here we implement an orrery using several approaches to traversing a
+ * list of planets to join their string representations into a single
+ * string result.  Each approach is represented as a trait.
+ *
+ * The trait OrreryOps has to be changed to extend a particular trait
+ * to try out that trait.  (Hint:  But they all behave identically,
+ * fingers crossed).
+ *
  * Ken Guyton
  * Sat 2013-01-19 13:38:54 -0500
  * 
@@ -25,38 +33,54 @@ package orrery {
   }
   
   /**
-   * An orrery that maps a string accumulator function over the planets.
+   * Map a string accumulator function over the planets.
    */
-  class MapOntoPlanetOrrery {
-    val planets: List[Planet] = List()
+  trait MapOntoPlanets {
+    var planets: List[Planet]
   
-    override def toString(): String = {
+    def toPlanetString(): String = {
       var str_accumulator = new OrreryString
       planets map str_accumulator.append
       str_accumulator.toString
     }
   }
 
+  /**
+   * Map a simple accumulating function onto the planets.
+   */
+   trait SimpleMapOntoPlanets {
+     var planets: List[Planet]
+
+     /**
+      * Use map to make a list of strings, then join them.
+      */
+     def toPlanetString: String = {
+       var outstr = ""
+       var planet_strings = planets map (_.toString)
+       planet_strings.mkString("\n")
+     }
+   }
+
 
   /**
-  * An orrery that uses the fold operation to implement toString.
-  */
-  class FoldPlanetOrrery {
-    val planets: List[Planet] = List()
+   * Fold a string accumulating operation over the planets.
+   */
+  trait FoldPlanets {
+    var planets: List[Planet]
   
-    override def toString(): String = {
+    def toPlanetString(): String = {
       ("" /:planets)(_ + _.toString() + "\n")
     }
   }
 
 
   /**
-   * An orrery that uses the foreach method of traversing the planet list.
+   * Use foreach to accumulate the planet strings.
    */
-  class ForEachPlanetOrrery {
-    val planets: List[Planet] = List()
+  trait ForEachPlanet {
+    var planets: List[Planet]
   
-    override def toString(): String = {
+    def toPlanetString(): String = {
       var outstr = ""
       planets foreach (outstr += _.toString + "\n")
       outstr
@@ -65,12 +89,9 @@ package orrery {
 
 
   /** 
-   * An orrery holds a collection of planets.
-   *
-   * This class defines the methods.  The planets value should be overridden
-   * with a specific list of planets.
+   * Operations for an orrery.
    */
-  class Orrery extends ForEachPlanetOrrery {
+  trait OrreryOps extends SimpleMapOntoPlanets {
     /**
      * Advance all planets in the orrery with the time step (measured in 
      * years.
@@ -78,14 +99,18 @@ package orrery {
     def step(delta_t: Double) = {
       planets map {_.step(delta_t)}
     }
+
+    override def toString: String = {
+      toPlanetString
+    }
   }
   
   
   /** 
    * A small orrery with three planets.
    */
-  object SmallOrrery extends Orrery {
-    override val planets: List[Planet] = List(
+  object SmallOrrery extends OrreryOps {
+    override var planets: List[Planet] = List(
       new Planet("Earth", 1.0, 0.0),
       new Planet("Jupiter", 5.0, 0.0),
       new Planet("Neptune", 30.1, 0.0)
