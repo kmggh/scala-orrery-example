@@ -55,7 +55,7 @@ package orrery {
       */
      def toPlanetString: String = {
        var planet_strings = planets map (_.toString)
-       planet_strings.mkString("\n")
+       planet_strings.mkString("", "\n", "\n")
      }
    }
 
