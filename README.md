@@ -15,7 +15,17 @@ To run
     scalac planet.scala
     scalac orrery.scala
     scalac run_orrery.scala
+    
     scala RunOrrery --help
     scala RunOrrery
 
 
+Run the full orrery
+===================
+
+Do this after the above compiles.
+
+    scalac run_full_orrery.scala
+    
+    scala RunFullOrrery --help
+    scala RunFullOrrery
