@@ -55,7 +55,6 @@ package orrery {
       * Use map to make a list of strings, then join them.
       */
      def toPlanetString: String = {
-       var outstr = ""
        var planet_strings = planets map (_.toString)
        planet_strings.mkString("\n")
      }
