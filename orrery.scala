@@ -1,13 +1,11 @@
 /**
  * A solar system orrery in Scala.
- *
- * Here we implement an orrery using several approaches to traversing a
- * list of planets to join their string representations into a single
- * string result.  Each approach is represented as a trait.
- *
- * The trait OrreryOps has to be changed to extend a particular trait
- * to try out that trait.  (Hint:  But they all behave identically,
- * fingers crossed).
+ * 
+ * Several approaches to the task of traversing a list of planets are
+ * provided below as illustrations. Each approach is represented as a
+ * trait.
+ * 
+ * The trait OrreryOps can be changed to use a particular trait.
  *
  * Ken Guyton
  * Sat 2013-01-19 13:38:54 -0500
@@ -17,7 +15,8 @@
 
 package orrery {
   /**
-  * A string object to accumulate planet string representations.
+  * A string object to accumulate planet string representations,
+  * used by the MapOntoPlanets trait below.
   */
   class OrreryString {
     var string_accumulator = new StringBuilder()
@@ -55,7 +54,6 @@ package orrery {
       * Use map to make a list of strings, then join them.
       */
      def toPlanetString: String = {
-       var outstr = ""
        var planet_strings = planets map (_.toString)
        planet_strings.mkString("\n")
      }
