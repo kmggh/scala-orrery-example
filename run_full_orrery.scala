@@ -10,6 +10,7 @@
 import orrery._
 import run_orrery_package._
 
+
 /** 
  * A full orrery with nine bodies orbiting the sun.
  */
@@ -33,27 +34,7 @@ object FullOrrery extends OrreryOps {
  * The count and step size can be specified on the command line.
  */
 object RunFullOrrery extends RunOrrery {
-  /*
-   * Print the intro.
-   */
-  override def printIntro  = {
-    println("RunFullOrrery using the orrery package.")
-    println("Stepping the orrery " + step_count +
-            " times after the initial position.")
-    println("With a time step increment of " + delta_t + " year(s).\n")
-  }
-
-  /*
-   * Print the initial position of the orrery.  Then step through each
-   * delta_t for step_count times and print out the positions.
-   */
-  override def runAndPrintTheOrrery  = {
-    val the_orrery = FullOrrery
-
-    println(the_orrery)
-    for (i <- 1 to step_count) {
-      the_orrery.step(delta_t)
-      println(the_orrery)
-    }
+  override def theOrrery: OrreryOps = {
+    FullOrrery
   }
 }

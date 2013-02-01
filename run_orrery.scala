@@ -9,6 +9,7 @@
 
 import orrery._
 
+
 package run_orrery_package {
   /*
    * Run the orrery class with a step size (years) for count times.
@@ -37,34 +38,39 @@ package run_orrery_package {
       }
     }
   
-    /*
-     * Print the intro.
-     */
+    /**
+      * Print the intro.
+      */
     def printIntro  = {
       println("RunOrrery using the orrery package.")
       println("Stepping the orrery " + step_count +
               " times after the initial position.")
       println("With a time step increment of " + delta_t + " year(s).\n")
     }
+
+    /**
+      * Use a particular type of orrery.
+      */
+    def theOrrery: OrreryOps = {
+      SmallOrrery
+    }
   
     /*
      * Print the initial position of the orrery.  Then step through each
      * delta_t for step_count times and print out the positions.
      */
-    def runAndPrintTheOrrery  = {
-      val the_orrery = SmallOrrery
-  
+    def runAndPrintTheOrrery(the_orrery: OrreryOps)  = {
       println(the_orrery)
       for (i <- 1 to step_count) {
         the_orrery.step(delta_t)
         println(the_orrery)
       }
     }
-  
+
     def main(args: Array[String]) {
       parseArgs(args)
       printIntro
-      runAndPrintTheOrrery
+      runAndPrintTheOrrery(theOrrery)
     }
   }
 }

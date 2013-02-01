@@ -30,6 +30,7 @@ package orrery {
       string_accumulator.toString
     }
   }
+
   
   /**
    * Map a string accumulator function over the planets.
@@ -43,6 +44,7 @@ package orrery {
       str_accumulator.toString
     }
   }
+
 
   /**
    * Map a simple accumulating function onto the planets.
@@ -102,8 +104,8 @@ package orrery {
       toPlanetString
     }
   }
-  
-  
+
+
   /** 
    * A small orrery with three planets.
    */
@@ -114,6 +116,4 @@ package orrery {
       new Planet("Neptune", 30.1, 0.0)
       )
   }
-
 }
-  
